@@ -21,6 +21,9 @@ public abstract class LoanMapper {
     @Autowired
     private BookRepository bookRepository;
 
+    @Mappings({
+            @Mapping(target = "id", ignore = true)
+    })
     Loan requestToEntity(LoanRequest request){
         if ( request == null ) {
             return null;

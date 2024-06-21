@@ -21,6 +21,9 @@ public abstract class ReservationMapper {
     @Autowired
     private BookRepository bookRepository;
     
+    @Mappings({
+            @Mapping(target = "id", ignore = true)
+    })
     Reservation requestToEntity(ReservationRequest request){
         if ( request == null ) {
             return null;

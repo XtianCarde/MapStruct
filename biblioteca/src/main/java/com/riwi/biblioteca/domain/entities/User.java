@@ -1,5 +1,7 @@
 package com.riwi.biblioteca.domain.entities;
 
+import java.util.List;
+
 import com.riwi.biblioteca.util.enums.Role;
 
 import jakarta.persistence.*;
@@ -28,4 +30,16 @@ public class User {
     private String fullName;
     @Column(nullable = false)
     private Role role;
+
+    @OneToMany(fetch = FetchType.LAZY,
+    mappedBy = "userEntity",
+    cascade = CascadeType.ALL,
+    orphanRemoval = false)
+    private List<Reservation> userBooks;
+
+    @OneToMany(fetch = FetchType.LAZY,
+    mappedBy = "userEntity",
+    cascade = CascadeType.ALL,
+    orphanRemoval = false)
+    private List<Loan> loanBooks;
 }

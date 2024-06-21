@@ -1,9 +1,13 @@
 package com.riwi.biblioteca.domain.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,8 +29,14 @@ public class Loan {
     private Long id;
     @Builder.Default
     private Date loanDate = new Date();
+    @Column(nullable = false)
     private Date returnDate;
+    @Column(nullable = false)
     private Active status;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User userEntity;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "book_id", referencedColumnName = "id")
     private Book bookEntity;
 }
