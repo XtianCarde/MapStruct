@@ -1,6 +1,7 @@
 package com.riwi.biblioteca.infrastructure.mappers;
 
 import com.riwi.biblioteca.api.dto.request.LoanRequest;
+import com.riwi.biblioteca.api.dto.response.LoanResponse;
 import com.riwi.biblioteca.domain.entities.Loan;
 import com.riwi.biblioteca.domain.repositories.BookRepository;
 import com.riwi.biblioteca.domain.repositories.UserRepository;
@@ -24,7 +25,7 @@ public abstract class LoanMapper {
     @Mappings({
             @Mapping(target = "id", ignore = true)
     })
-    Loan requestToEntity(LoanRequest request){
+    public Loan requestToEntity(LoanRequest request){
         if ( request == null ) {
             return null;
         }
@@ -39,5 +40,7 @@ public abstract class LoanMapper {
 
         return loan.build();
     }
+
+    abstract public LoanResponse entityToResponse(Loan loan);
 }
 

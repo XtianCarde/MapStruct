@@ -1,6 +1,7 @@
 package com.riwi.biblioteca.infrastructure.mappers;
 
 import com.riwi.biblioteca.api.dto.request.ReservationRequest;
+import com.riwi.biblioteca.api.dto.response.ReservationResponse;
 import com.riwi.biblioteca.domain.entities.Reservation;
 import com.riwi.biblioteca.domain.repositories.BookRepository;
 import com.riwi.biblioteca.domain.repositories.UserRepository;
@@ -24,7 +25,7 @@ public abstract class ReservationMapper {
     @Mappings({
             @Mapping(target = "id", ignore = true)
     })
-    Reservation requestToEntity(ReservationRequest request){
+    public Reservation requestToEntity(ReservationRequest request){
         if ( request == null ) {
             return null;
         }
@@ -37,4 +38,6 @@ public abstract class ReservationMapper {
 
         return reservation.build();
     };
+
+    abstract public ReservationResponse entityToResponse(Reservation reservation);
 }
