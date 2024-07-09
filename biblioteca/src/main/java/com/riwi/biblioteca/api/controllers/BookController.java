@@ -43,6 +43,11 @@ public class BookController {
         return ResponseEntity.ok(this.bookService.get(id));
     }
 
+    @GetMapping(path = "/{id}/reservations")
+    private ResponseEntity<BookResponse> reservationsById(@PathVariable Long id){
+        return ResponseEntity.ok(this.bookService.reservationsOfBook(id));
+    }
+
     @PutMapping(path = "/{id}")
     private ResponseEntity<BookResponse> update(@PathVariable Long id, @RequestBody BookRequest bookRequest){
         return ResponseEntity.ok(this.bookService.update(bookRequest, id));

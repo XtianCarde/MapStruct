@@ -7,10 +7,12 @@ import org.springframework.stereotype.Service;
 
 import com.riwi.biblioteca.api.dto.request.BookRequest;
 import com.riwi.biblioteca.api.dto.response.BookResponse;
+import com.riwi.biblioteca.api.dto.response.ReservationsOfBookResp;
 import com.riwi.biblioteca.domain.entities.Book;
 import com.riwi.biblioteca.domain.repositories.BookRepository;
 import com.riwi.biblioteca.infrastructure.abstract_service.IBookService;
 import com.riwi.biblioteca.infrastructure.mappers.BookMapper;
+import com.riwi.biblioteca.infrastructure.mappers.ReservationsOfBookMapper;
 import com.riwi.biblioteca.util.exceptions.BadRequestException;
 
 import lombok.AllArgsConstructor;
@@ -23,6 +25,8 @@ public class BookService implements IBookService {
     private final BookRepository bookRepository;
     @Autowired
     private final BookMapper bookMapper;
+    @Autowired
+    private final ReservationsOfBookMapper reservationsOfBookMapper;
     
     @Override
     public BookResponse create(BookRequest rq) {
@@ -57,7 +61,13 @@ public class BookService implements IBookService {
         return this.bookRepository.findAll(pagination).map(this.bookMapper::entityToResponse);
     }
     
+    @Override
+    public ReservationsOfBookResp reservationsOfBook(Long id) {
+        return this.reservationsOfBookMapper.reservationsOfBook(this.find(id));
+    }
+
     private Book find(Long id){
         return this.bookRepository.findById(id).orElseThrow(() -> new BadRequestException("El libro por el id suministrado no se encuentra"));
     }
+
 }
