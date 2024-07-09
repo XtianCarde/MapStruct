@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.riwi.biblioteca.api.dto.request.UserRequest;
 import com.riwi.biblioteca.api.dto.response.LoansOfUserResponse;
+import com.riwi.biblioteca.api.dto.response.ReservationOfUserResp;
 import com.riwi.biblioteca.api.dto.response.UserResponse;
 import com.riwi.biblioteca.infrastructure.abstract_service.IUserService;
 
@@ -39,6 +40,11 @@ public class UserController {
     @GetMapping(path = "/{id}/loans")
     public ResponseEntity<LoansOfUserResponse> loans(@PathVariable Long id){
         return ResponseEntity.ok(this.userService.loansOfUser(id));
+    }
+
+    @GetMapping(path = "/{id}/reservations")
+    public ResponseEntity<ReservationOfUserResp> reservations(@PathVariable Long id){
+        return ResponseEntity.ok(this.userService.reservationsOfUser(id));
     }
 
     @PutMapping(path = "/{id}")

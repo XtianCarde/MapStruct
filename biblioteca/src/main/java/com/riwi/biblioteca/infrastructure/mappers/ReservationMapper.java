@@ -13,7 +13,7 @@ import org.mapstruct.MappingConstants;
 import org.mapstruct.Mappings;
 import org.springframework.beans.factory.annotation.Autowired;
 
-@Mapper(componentModel = MappingConstants.ComponentModel.SPRING, uses = {UserMapper.class})
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public abstract class ReservationMapper {
 
     @Autowired
